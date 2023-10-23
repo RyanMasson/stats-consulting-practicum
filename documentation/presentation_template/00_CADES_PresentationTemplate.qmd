@@ -1,0 +1,315 @@
+---
+title: "Project Name"
+subtitle: "A subtitle if needed"
+author: "CADES Consulting Lab"
+format:
+    revealjs:
+      theme: default
+      preview-links: auto
+      logo: psulogo2.jpg
+      css: logo.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Background and Goals
+
+## Project Background
+
+Something about background here
+
+- something 1
+
+- something 2
+
+- something 3 with some `rpackage` font
+
+
+## Goals
+
+- Goal 1 
+
+. . . 
+
+- Goal 2
+
+. . .
+
+- Goal 3
+
+
+# Data Exploration
+
+## Data Exploration: the process
+
+Outline here the steps you took to explore the data
+
+## Data Exploration: results
+
+Provide a few slides presenting some of the most important results from your exploration
+
+## Data Exploration: insights
+
+Here is where you synthesize your findings, tying them to implications regarding how viable the goals of the project are. 
+
+For example:
+
+. . .
+
+* Given the EDA, is the data available suitable to tackle the client's goals?
+
+. . .
+
+* What are some challenges that the client might run into in the analysis because of their data
+
+
+# Methods
+
+## Methods Description
+
+* List the method or methods that you identified (these methods should take into account the nature of the problem, the type of data available, as well as the particularities and challenges identified in the EDA)
+
+. . .
+
+* Provide a brief description of the approaches
+
+## Methods Comparison
+
+Mention/Contrast their strengths and weaknesses, building up to your recommended option. 
+
+# Methods Implementation
+
+## Methods Implementation
+
+Describe the characteristics of a synthetic data or real data example, including:
+
+* the format of the data (list, matrix, data frame) (assume the one used by the functions you use in your code)
+
+* number of: observations, predictors, responses
+
+* description of: predictors and responses
+
+
+## Methods Implementation
+
+Provide here code implementing the methods (this should include any model fitting, results extraction, derived plots, etc)
+
+
+# Summary and recommendations
+
+## Summary  and Recommendations
+
+
+# Useful quarto Features
+
+## LInks to quarto tutorials
+
+* [Welcome to Quarto](https://quarto.org/)
+
+* [Download Quarto](https://quarto.org/docs/get-started/)
+
+* [Quarto in Jupiter](https://quarto.org/docs/get-started/hello/jupyter.html)
+
+* [Quarto in RStudio](https://quarto.org/docs/get-started/hello/rstudio.html)
+
+* [Making presentations in quarto](https://quarto.org/docs/presentations/)
+
+  * I recommend using the [`revealjs` format](https://quarto.org/docs/presentations/revealjs/)
+
+
+
+## Pretty Code {auto-animate="true"}
+
+-   Over 20 syntax highlighting themes available
+-   Default theme optimized for accessibility
+
+``` r
+# Define a server for the Shiny app
+function(input, output) {
+  
+  # Fill in the spot we created for a plot
+  output$phonePlot <- renderPlot({
+    # Render a barplot
+  })
+}
+```
+
+## Code Animations {auto-animate="true"}
+
+-   Over 20 syntax highlighting themes available
+-   Default theme optimized for accessibility
+
+``` r
+# Define a server for the Shiny app
+function(input, output) {
+  
+  # Fill in the spot we created for a plot
+  output$phonePlot <- renderPlot({
+    # Render a barplot
+    barplot(WorldPhones[,input$region]*1000, 
+            main=input$region,
+            ylab="Number of Telephones",
+            xlab="Year")
+  })
+}
+```
+
+
+## Line Highlighting
+
+-   Highlight specific lines for emphasis
+-   Incrementally highlight additional lines
+
+``` {.python code-line-numbers="4-5|7|10"}
+import numpy as np
+import matplotlib.pyplot as plt
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+
+## Executable Code
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+library(ggplot2)
+ggplot(mtcars, aes(hp, mpg, color = am)) +
+  geom_point() +
+  geom_smooth(formula = y ~ x, method = "loess")
+```
+
+
+## LaTeX Equations
+
+[MathJax](https://www.mathjax.org/) rendering of equations to HTML
+
+::: columns
+::: {.column width="40%"}
+``` tex
+\begin{gather*}
+a_1=b_1+c_1\\
+a_2=b_2+c_2-d_2+e_2
+\end{gather*}
+\begin{align}
+a_{11}& =b_{11}&
+  a_{12}& =b_{12}\\
+a_{21}& =b_{21}&
+  a_{22}& =b_{22}+c_{22}
+\end{align}
+```
+:::
+
+::: {.column width="60%"}
+```{=tex}
+\begin{gather*}
+a_1=b_1+c_1\\
+a_2=b_2+c_2-d_2+e_2
+\end{gather*}
+```
+```{=tex}
+\begin{align}
+a_{11}& =b_{11}&
+  a_{12}& =b_{12}\\
+a_{21}& =b_{21}&
+  a_{22}& =b_{22}+c_{22}
+\end{align}
+```
+:::
+:::
+
+
+## Column Layout {.smaller}
+
+Arrange content into columns of varying widths:
+
+::: columns
+::: {.column width="35%"}
+#### Motor Trend Car Road Tests
+
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles.
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="62%"}
+```{r}
+knitr::kable(head(mtcars)[,c("mpg",	"cyl", "disp", "hp", "wt")])
+```
+:::
+:::
+
+
+## Fragments
+
+Incremental text display and animation with fragments:
+
+<br/>
+
+::: {.fragment .fade-in}
+Fade in
+:::
+
+::: {.fragment .fade-up}
+Slide up while fading in
+:::
+
+::: {.fragment .fade-left}
+Slide left while fading in
+:::
+
+::: {.fragment .fade-in-then-semi-out}
+Fade in then semi out
+:::
+
+. . .
+
+::: {.fragment .strike}
+Strike
+:::
+
+::: {.fragment .highlight-red}
+Highlight red
+:::
+
+
+
+## Slide Backgrounds {background="#43464B"}
+
+Set the `background` attribute on a slide to change the background color (all CSS color formats are supported).
+
+Different background transitions are available via the `background-transition` option.
+
+
+
+## Incremental lists
+
+From the manual:
+
+::: {.incremental}
+- R is a system for statistical computation and graphics
+
+- R provides a programming language, high level graphics, interfaces to other languages and debugging facilities
+
+:::
+
+. . .
+
+From the creator (John Chambers)
+
+::: {.incremental}
+- Everything that exists is an object
+
+- Everything that happens is a function call
+
+:::

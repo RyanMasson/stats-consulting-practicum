@@ -1,0 +1,135 @@
+---
+title: "Project Name Here"
+subtitle: "CADES Consulting Lab"
+author: 
+ - First Member's Name
+ - Second Member's Name
+ - Third Member's Name
+ - Fourth Member's Name
+date: "Report Last Run: `r Sys.time()`"
+format: 
+  pdf:
+    include-in-header: 
+      - header.tex
+    toc: true
+    number-sections: false
+    colorlinks: true
+    documentclass: report
+    papersize: letter
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.align="center")
+```
+
+# Project Report
+
+To be able to compile this template from R you'll need to follow the instructions [here](https://quarto.org/docs/get-started/), where they explain how to install Quarto, and download the necessary R packages. You also need to install a distribution of LaTeX by typing in the \textsf{Terminal} window in \textsf{RStudio} the following command:
+
+```{r echo=T, eval=F}
+quarto install tool tinytex
+```
+
+For more details, go over the \textsf{Authoring} tutorial [here](https://quarto.org/docs/get-started/authoring/rstudio.html).
+
+
+## Executive Summary
+
+The executive summary contains a brief account of your final recommendations, it should be very short and to the point. Write the results not the description of the problem.
+
+## Introduction and Background
+
+In this section, get right to describing the main questions to be answered and the goals behind the consulting project taken on. Here you'll paraphrase the problem you that you tackled, relevant issues present in the analysis that will be dealt with. You will discuss relevant background information here, such as some information alluding to the context of the problem, what the client or other people ion their field has attempted to solve it, etc.  Also, define any technical terms needed for the remainder of the paper.Don't include technical terms if you don't use them later. That hurts clarity. Finally, it's a good idea to summarize your strategy and recommendations in this section, so that clients will know what to look for as they read.
+
+
+## Data
+
+
+### Basic Data Description
+
+Here you should describe how the data were collected; describe the variables used in the models; number of observations available; and, discuss issues such as missing data or confidentiality restrictions on the data. Never include the actual data in the report!!!
+
+
+### Exploratory Data Analysis
+
+It's good practice to carry out a thoughtful exploratory analysis and provide a succinct description of the results stemming from it. 
+
+### Connect the dots
+
+In this section, connect the dots for the client so they can get a big picture idea of how issues and aspects present in their data impact their ability to solve their question, and help identify suitable methods to tackle them.  
+
+
+
+### Connect the Dots
+
+## Methods
+
+Here you describe the methodology/methodologies you considered in exploring the consulting project. Furthermore, you need to state upfront the assumptions that you are making.
+
+## Conclusions and recommendations
+
+In this section, you discuss your recommended strategy for approaching the problem and show the specific methods you'd use for in analysis. Explain what these methods will do in terms of the questions the client posed and goals of the project. You can discuss issues that merit further exploration, interesting relationships among variables that are not quite central to answering the questions that might be things the client could look into. Importantly mention reservations about the analyses that you think may require more complex modeling, either due to modeling assumptions not holding, or by discoveries made along the process of analyzing the data that might hinder the validity of your conclusions. Also include any relavant diagnostics for your suggested methods. Working out a toy example from start to finish is a great way to demonstrate how your suggested method(s) could be implimented.
+
+## References
+
+Include all bibliographical references used here.  See [this link](https://quarto.org/docs/get-started/authoring/rstudio.html#citations) to learn about adding references to the document.
+
+
+
+# Quarto Basics
+
+The sections that follow describe a few basic tips on how to use Quarto. Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.  
+
+See [this link](https://quarto.org/docs/get-started/authoring/rstudio.html) to learn more (e.g., cross-references, equations, output formats, etc.) about authoring documents on Quarto.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+```{r cars}
+summary(cars)
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Including Tables
+
+Here's an example of a table
+
+```{r results='asis'}
+library(knitr)
+
+# Example data
+headers <- c("Column 1", "Column 2", "Column 3")
+data <- data.frame(
+  a = c(1, 2, 3),
+  b = c(4, 5, 6),
+  c = c(7, 8, 9)
+)
+
+# Create the table
+kable(data, col.names = headers, align = rep("l", length(headers)), 
+      col.width = rep(1.5, length(headers)))
+```

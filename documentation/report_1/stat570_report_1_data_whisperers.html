@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Elizabeth (“Betsy”) Camp">
+<meta name="author" content="Ryan Masson">
+<meta name="author" content="Will McIntosh">
+<meta name="author" content="Lauren Montefalcon">
+<meta name="dcterms.date" content="2023-05-14">
+
+<title>Separating intended versus unintended learning effect in implicit learning with preschoolers</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="stat570_report_1_data_whisperers_files/libs/clipboard/clipboard.min.js"></script>
+<script src="stat570_report_1_data_whisperers_files/libs/quarto-html/quarto.js"></script>
+<script src="stat570_report_1_data_whisperers_files/libs/quarto-html/popper.min.js"></script>
+<script src="stat570_report_1_data_whisperers_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="stat570_report_1_data_whisperers_files/libs/quarto-html/anchor.min.js"></script>
+<link href="stat570_report_1_data_whisperers_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="stat570_report_1_data_whisperers_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="stat570_report_1_data_whisperers_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="stat570_report_1_data_whisperers_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="stat570_report_1_data_whisperers_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Separating intended versus unintended learning effect in implicit learning with preschoolers</h1>
+<p class="subtitle lead">CADES Consulting Lab</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Elizabeth (“Betsy”) Camp </p>
+             <p>Ryan Masson </p>
+             <p>Will McIntosh </p>
+             <p>Lauren Montefalcon </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 14, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div style="page-break-after: always;"></div>
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
+<p>The primary goal of the work described herein is to separate out the impact of an alternating visual cue from the intended learning effect of an auditory cue on a participants response in experimental data on implicit learning in preschoolers. Multiple analysis approaches were considered which culminated in moving toward causal inference approaches often seen in longitudinal studies in medicine where time-varying confounders are commonplace. Our current recommendation to pursue two analysis methods which differ from one another but seem most likely to be successful in achieving the goal of separating the impact of the confounding visual cue as well as both being feasible to execute from a technical perspective.</p>
+</section>
+<section id="introduction-and-background" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-and-background">Introduction and Background</h2>
+<p>An experimental study was done comparing implicit learning of preschoolers with developmental language disorder (DLD) versus preschoolers with typical language development (TLD). Participants were first tested on their ability to differentiate between the auditory cues that would be used in the subsequent parts of the experiment. Then, participants underwent a computer-based “training” period where a “monster” on the computer screen asked for food or drink by emitting sounds of a specific pitch or duration. In other words, participants were given an auditory cue in the form of a sound with a pitch or duration, which was associated with a specific visual cue in the form of an image of food or drink. Participants would press keys on the computer keyboard either before or after the image appeared to indicate whether food or drink was being requested based on the sound emitted by the monster. In the testing phase of the experiment, participants were exposed to the sound, and they indicated on the keyboard whether the monster was asking for food or drink. Only after the participant entered their response on the keyboard did the image of the food or drink appear on the computer screen. Note that in both training and testing phases, the image of the drink would appear from the left-hand side of the screen and the image of food would appear from the right. The order of the food or drink trials were pseudo-random. However, in the process of psuedo-randomizing, the food and drink typically alternated. This alternation allowed participants to formulate a heuristic to predict whether the next trial would be food or drink based on the present trial. Figure 1 shows a visual depiction of both training and testing phases of the experiment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../visualization/preschoolers_exp_setup.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Experimental set up of the traing and testing phase showing sound which varies in pitch or duration which is associate with either food or drink (reprinted from <span class="citation" data-cites="cairns_crystal_l_implicit_2022">Cairns, Crystal L. et al. (<a href="#ref-cairns_crystal_l_implicit_2022" role="doc-biblioref">2022</a>)</span>).</figcaption>
+</figure>
+</div>
+<p>Due to the frequent alternation of food and drink and the associated heuristic, participants adopted to predict whether food or drink be indicated in the subsequent trial, the experimental results show a combined learning effect. Specifically, the experimental results contain both the effect of the learned alternation heuristic with the learned association of a sound with the food or drink.</p>
+<p>The goal of the work herein was to determine if the learned alternation heuristic could be separated from the learned sound and food/drink association.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="basic-data-description" class="level3">
+<h3 class="anchored" data-anchor-id="basic-data-description">Basic Data Description</h3>
+<p>The experimental results utilized in the present work were in tabular form. The response variable shows whether the participant was correct or incorrect in indicating whether the monster requested food or drink. Thus, the response variable has a binary form. Additional variables explored were response time in seconds, trial number, trial order type, sound type, experimental phase (training, testing), alternation from previous trial, and participant type (TLD, DLD). There were 26 participants with DLD and 26 participants in the TLD class. Participant data such as school test scores were recoded in order to ensure participants’ identifiable information remained confidential.</p>
+</section>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h3>
+<p>Since the fundamental goal herein is to separate the alternation on the response variable from any learned association between the pitch or duration of the sound and the food/drink, the number of participants in each class was first examined. Figure 2 shows the count of participants with DLD versus TLD in each trial order group. The trial order group specifies the sequence of alternation of the stimuli in the training and tests.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../visualization/count_trialorder_participants.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Count of participants in each trial order with DLD versus TLD</figcaption>
+</figure>
+</div>
+<p>In Figure 2, the count of participants in each trial order group with DLD or TLD varies between 3 and 5. Thus, the number of participants in each class is not perfectly balanced. This small imbalance in participants will impact any subsequent analysis conditioned on TLD/DLD and trial order. Note that the count of participants with TLD versus those with DLD is perfectly balanced, with both counts being 26.</p>
+<p>The response variable for each trial is whether the keyboard entry by the participant correctly or incorrectly indicates whether food or drink was called for by the monster’s sounds. However, the response time for the participant’s keyboard entry does suggest something about how the participant is learning during the training or testing phases. Figure 3 shows the participant response time in seconds as a function of the trial number during the training phase of the experiment. Data for participants with DLD versus TLD are shown by different marker colors in Figure 3, and a linear fit through the DLD versus TLD groups is superimposed on the response time. Figure 4 shows the corresponding data for response time as a function of the trial number for the testing phase of the experiment. Note that the ordinary least squares linear fit is shown for convenience to obtain a visual indicator of key trends. In order to make statements as to whether differences in slopes are statistically significant, hypothesis testing should be performed. For example, if the slope of the linear fit of the DLD participants during training is <span class="math inline">\(\beta_{1,train}\)</span> and the slope of the linear fit of the DLD participants during testing is <span class="math inline">\(\beta_{1,test}\)</span>, we could test the null hypothesis of <span class="math inline">\(\beta_{1,train}=\beta_{1,test}\)</span> versus <span class="math inline">\(\beta_{1,train} \neq \beta_{1,test}\)</span> to determine if the slopes are significantly different.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../visualization/response_time_training.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Response time as a function of trial number during training phase</figcaption>
+</figure>
+</div>
+<p>Surprisingly, the slope of the linear fit in the training period (see Figure 3) is smaller than in the testing period (see Figure 4), particularly for the DLD participants. This response time change suggests that the participants’ interaction with the stimuli and, thus, any learning is perhaps still occurring during the testing phase of the experiment. We expected different sets of trends in Figures 3 and 4. Specifically, we expected that the response time would change more in the training phase than the testing phase and we expected a relatively minor change in response time during the testing phase. Furthermore, we expected the response time to change more for TLD versus DLD participants if the TLD participants learned at a greater rate than DLD participants.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../visualization/response_time_testingphase.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Response time as a function of trial number during testing phase</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="connect-the-dots-eda" class="level2">
+<h2 class="anchored" data-anchor-id="connect-the-dots-eda">Connect the dots: EDA</h2>
+<p>Analysis methods aimed at isolating the impact of the visual alternation of food/drink from the impact of the sound on the participant’s keyboard response typically involve conditioning on the alternation indicator variable and the sound variable. The number of participants in each trial order class is not perfectly balanced, which may reduce our ability to detect differences. Furthermore, one analysis approach would be to conceive of the trials as individual treatment periods in a cross-over experimental design. The fact that the response time changes as a function of the trial number indicates an interaction from period to period which would increase Type I error in an analysis of this type (see Methods section for further information).</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="methods-examined-and-determined-unsuitable" class="level3">
+<h3 class="anchored" data-anchor-id="methods-examined-and-determined-unsuitable">Methods examined and determined unsuitable</h3>
+<p>First, we explored separating the audio learning cue from the unintended visual cue as a process of fitting a mixed effects model based on a crossover experimental design. This seemed to be a promising approach that might allow us to estimate the effect of the visual cue on the testing accuracy of the children, and thus control for it.</p>
+<p>A mixed effects model based on conceptualizing each trial of the present experiment as a period in a crossover design initially seemed like a good choice. In a crossover experimental design, the study involves sequences of treatments applied to individual subjects over successive time periods. In this type of experiment, the individual participant becomes a random effect due to the study participants being a sample from the theoretical larger populations of children with DLD and TLD. So a mixed effects model could include the fixed effect of the implicit learning treatment (the sound files), the random effect of the participant, and the fixed effect of the alternation pattern.</p>
+<p>We did note that there are inherent difficulties with approaching this study as a crossover design. One of the critical challenges in a crossover design can arise when a treatment effect from one period is still present in subsequent periods. A treatment effect that persists from one period to later periods is called a carryover effect. In the present study, carryover effects would be present if learning from one trial impacted the next or subsequent trials. In Figure 4, we observed that response times in the testing trials decreased over the course of the testing phase, suggesting that the participants were continuing to learn during the trials in the testing phase. Due to the carryover effects that appear to be present between subsequent trials in the testing phase of the experiment, we concluded that analyzing the experimental data as if it was a crossover experimental design would not be suitable (see <span class="citation" data-cites="noauthor_lesson_nodate"><span>“Lesson 15: <span>Crossover</span> <span>Designs</span> <span></span> <span>STAT</span> 509”</span> (<a href="#ref-noauthor_lesson_nodate" role="doc-biblioref">n.d.</a>)</span>).</p>
+<p>Another approach we considered was to fit mixed effects model with additional lag terms. We envisioned that lag terms would capture the alternation from previous trials that could potentially impact the present trial under consideration. For example, one such model with lag terms would be</p>
+<p><span id="eq-mixed-effects-lagterm"><span class="math display">\[
+y_t = f(group, soundDim_t, soundLevel_t , trialOrder, trial, side_{t-1})
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(y_t\)</span> is the response of correct or incorrect for trial <span class="math inline">\(t\)</span>, group is the language development group TLD or DLD, <span class="math inline">\(soundDim_t\)</span> is pitch or duration for trial <span class="math inline">\(t\)</span>, <span class="math inline">\(soundLevel_t\)</span> is the pitch or duration level of trial <span class="math inline">\(t\)</span>, <span class="math inline">\(trialOrder\)</span> is the participant trial order group which describes the sequence of food or drink, <span class="math inline">\(trial\)</span> is the trial number, and <span class="math inline">\(side_{t-1}\)</span> describes whether the side alternated in the previous trial. We investigated using the <code>gam()</code> function from the R package <code>mgcv</code> to fit a mixed effects model similar to <a href="#eq-mixed-effects-lagterm">Equation&nbsp;1</a> and was implemented by Simpson <em>et al.</em> (<span class="citation" data-cites="simpson_using_2021">Simpson (<a href="#ref-simpson_using_2021" role="doc-biblioref">2021</a>)</span>). However, we determined that another approach was needed because the treatment is time-varying and the confounding due to side alternation is also time-varying which cannot be handled adequately in this method.</p>
+</section>
+<section id="methods-for-further-consideration" class="level3">
+<h3 class="anchored" data-anchor-id="methods-for-further-consideration">Methods for further consideration</h3>
+<p>Time-varying treatment and time-varying confounding are sometimes present in longitudinal studies common in medicine. As a result, various methods have been developed to analyze such studies, including causal inference methods. Three causal inference methods were considered, including the G-formula method, inverse probability weighting, and G-estimation. Of these, the G-formula approach seems most appropriate and feasible since an R package has been developed to implement this method (<span class="citation" data-cites="mcgrath_gformula_2020">McGrath et al. (<a href="#ref-mcgrath_gformula_2020" role="doc-biblioref">2020</a>)</span>), and interactions between the time-varying treatment and time-varying covariates can be explored and are explicitly modeled (<span class="citation" data-cites="daniel_methods_2013">Daniel et al. (<a href="#ref-daniel_methods_2013" role="doc-biblioref">2013</a>)</span>). Furthermore, both binary and continuous response variables can be handled, allowing the method to be applied to each trial or collectively to estimate a total effect (<span class="citation" data-cites="daniel_methods_2013">Daniel et al. (<a href="#ref-daniel_methods_2013" role="doc-biblioref">2013</a>)</span>).</p>
+<p>In addition to causal inference methods, another approach that has been used for longitudinal studies with time-varying treatments and time-varying covariates in the literature is sequential conditional mean models (SCMM) fitted using generalized estimating equations (GEEs) (<span class="citation" data-cites="keogh_analysis_2018">Keogh et al. (<a href="#ref-keogh_analysis_2018" role="doc-biblioref">2018</a>)</span>). While the seminal work on the use of SCMMs fitted using GEEs was published in 2018, the approach has been applied by Beccia et al., wherein an appropriate R package to carry out modeling using the SCMM fitted using a GEE was identified (<span class="citation" data-cites="beccia_cumulative_2022">Beccia et al. (<a href="#ref-beccia_cumulative_2022" role="doc-biblioref">2022</a>)</span>). One of the advantages of SCMMs is that these models are essentially standard regression models with multiple additional terms reflecting past treatment exposure as well as exposure to the time-varying covariate(s). Furthermore, SCMMs are also adjusted via propensity score to improve robustness. The propensity score of a participant at time <span class="math inline">\(t\)</span> is the participant’s probability of having the treatment exposure at time <span class="math inline">\(t\)</span> conditioned on experimental conditions at all previous time points.</p>
+<p>The open-source package gfoRmula, released in 2020, implements the G-formula (https://www.cell.com/patterns/fulltext/S2666-3899(20)30008-8). Adapting the package to the language development study primarily involves defining the output type as well as the input data frame. The likely best outcome type to use is “continuous end of follow-up,” using each participant’s accuracy score at the end of the testing period as the response variable. Then an input data frame to the main gformula() function must be defined, as shown in the below figure. We would then take coefficient estimates from the resulting models and interpret the effect of alternation on participant accuracy.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../visualization/gformula_dataframe.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Outline of input data frame to gformula(); header is in the format “column definition from the package release: adaptation to the language development study”</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="conclusions-and-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-recommendations">Conclusions and Recommendations</h2>
+<p>Separating the effect of an auditory cue from an unintended alternating visual cue is a challenging problem. The experimental data has been explored and characterized. Analysis methods were identified and ultimately discarded. Two promising approaches, the G-formula method and sequential conditional mean models (SCMM), have been identified, which have been successfully applied in the literature. These methods have been used advantageously in studies with time-varying treatments and time-varying covariates. In the present experiment, the time-varying treatment is the combined sound type (pitch or duration) with the level of the sound, and the time-varying covariate is the impact of the alternating visual cue. The G-formula method and SCMMs seem technically feasible, and R packages have been found to enable the execution of both approaches. We recommend that both methods be pursued in future work.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-beccia_cumulative_2022" class="csl-entry" role="listitem">
+Beccia, Ariel L., S. Bryn Austin, Jonggyu Baek, Madina Agénor, Sarah Forrester, Eric Y. Ding, William M. Jesdale, and Kate L. Lapane. 2022. <span>“Cumulative Exposure to State-Level Structural Sexism and Risk of Disordered Eating: <span>Results</span> from a 20-Year Prospective Cohort Study.”</span> <em>Social Science &amp; Medicine</em> 301 (May): 114956. <a href="https://doi.org/10.1016/j.socscimed.2022.114956">https://doi.org/10.1016/j.socscimed.2022.114956</a>.
+</div>
+<div id="ref-cairns_crystal_l_implicit_2022" class="csl-entry" role="listitem">
+Cairns, Crystal L., Ward, Sam, Duran, Emma, Franz, Molly, and Quam, Carolyn,. 2022. <span>“Implicit <span>Learning</span> in <span>Preschoolers</span> with <span>Developmental</span> <span>Language</span> <span>Disorder</span>.”</span> In <em>Portland <span>State</span> <span>University</span> <span>Student</span> <span>Research</span> <span>Symposium</span></em>.
+</div>
+<div id="ref-daniel_methods_2013" class="csl-entry" role="listitem">
+Daniel, R. M., S. N. Cousens, B. L. De Stavola, M. G. Kenward, and J. A. C. Sterne. 2013. <span>“Methods for Dealing with Time-Dependent Confounding.”</span> <em>Statistics in Medicine</em> 32 (9): 1584–1618. <a href="https://doi.org/10.1002/sim.5686">https://doi.org/10.1002/sim.5686</a>.
+</div>
+<div id="ref-keogh_analysis_2018" class="csl-entry" role="listitem">
+Keogh, Ruth H, Rhian M Daniel, Tyler J VanderWeele, and Stijn Vansteelandt. 2018. <span>“Analysis of <span>Longitudinal</span> <span>Studies</span> <span>With</span> <span>Repeated</span> <span>Outcome</span> <span>Measures</span>: <span>Adjusting</span> for <span>Time</span>-<span>Dependent</span> <span>Confounding</span> <span>Using</span> <span>Conventional</span> <span>Methods</span>.”</span> <em>American Journal of Epidemiology</em> 187 (5): 1085–92. <a href="https://doi.org/10.1093/aje/kwx311">https://doi.org/10.1093/aje/kwx311</a>.
+</div>
+<div id="ref-noauthor_lesson_nodate" class="csl-entry" role="listitem">
+<span>“Lesson 15: <span>Crossover</span> <span>Designs</span> <span></span> <span>STAT</span> 509.”</span> n.d. <em>PennState STAT509: Lesson 15-Crossover Designs</em>. Accessed May 6, 2023. <a href="https://online.stat.psu.edu/stat509/lesson/15">https://online.stat.psu.edu/stat509/lesson/15</a>.
+</div>
+<div id="ref-mcgrath_gformula_2020" class="csl-entry" role="listitem">
+McGrath, Sean, Victoria Lin, Zilu Zhang, Lucia C. Petito, Roger W. Logan, Miguel A. Hernán, and Jessica G. Young. 2020. <span>“<span class="nocase">gfoRmula</span>: <span>An</span> <span>R</span> <span>Package</span> for <span>Estimating</span> the <span>Effects</span> of <span>Sustained</span> <span>Treatment</span> <span>Strategies</span> via the <span>Parametric</span> g-Formula.”</span> <em>Patterns</em> 1 (3). <a href="https://doi.org/10.1016/j.patter.2020.100008">https://doi.org/10.1016/j.patter.2020.100008</a>.
+</div>
+<div id="ref-simpson_using_2021" class="csl-entry" role="listitem">
+Simpson, Gavin. 2021. <span>“Using Random Effects in <span>GAMs</span> with Mgcv.”</span> <em>From the Bottom of the Heap</em>. <a href="https://www.fromthebottomoftheheap.net/2021/02/02/random-effects-in-gams/">https://www.fromthebottomoftheheap.net/2021/02/02/random-effects-in-gams/</a>.
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

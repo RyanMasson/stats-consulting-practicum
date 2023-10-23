@@ -1,0 +1,309 @@
+---
+title: "initial modeling experimentation"
+author: "Ryan Mason & Elizabeth Camp"
+date: "04/22/2023"
+output:
+  html_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# set up R
+setwd("/Users/ecamp/code_sandbox/courses/stat564")
+library(ggplot2)
+```
+# Problem 2.1
+## part A): Find a simple linear regression model
+Our model is
+\[
+Y = \beta_0+\beta_1 X+\epsilon.
+\]
+
+Here, $Y$ is Games Won and $X$ is Opponents' Rushing Yards. Using R's `lm` function to fit the model:
+``` {r}
+#read in data
+data_p2_1 <- read.csv(file ="./data/linear_regression_5e_data_sets/Appendices/data-table-B1.csv")
+
+# fit model & print summary
+model_p2_1 <- lm(y ~ x8,data = data_p2_1)
+summary(model_p2_1 )
+```
+From the above summary table, we have the fitted model which is 
+\[
+\hat{y} = 21.788251 -0.007025 x 
+\]
+
+## part B): Construct an analysis-of-variance table & test for significance of regression
+``` {r}
+# use fitted model from part A to create ANOVA table
+anova(model_p2_1)
+```
+In the above ANOVA table we are able to test the null hypothesis $H_0: \beta_1=0$ vs.
+the alternative hypothesis $H_a: \beta_1 \neq 0$. If we are using the significance level of $\alpha=0.05$, 
+we can see in the ANOVA table that $p=7.381 * 10^{-6}$. Since $p<\alpha$, we can reject $H_0$ and so it's reasonable to say that $x$ does have value in explaining the variation in $y$. Note we could have used the $t$-test in the output of part A from the `lm` function to arrive at the same conclusion.
+
+## part C): Find a 95% CI on the slope
+``` {r}
+# calculate confidence interval using R
+print(confint(model_p2_1, "x8", level=0.95))
+```
+
+
+Calculate confidence interval using R function `confint` & confirm by calculating CI by hand
+``` {r}
+# calculate confidence interval using R
+print(confint(model_p2_1, "x8", level=0.95))
+
+# length of vectors x & y is given by the number of rows in the dataset
+n <- nrow(data_p2_1)
+beta_1 <- -0.007025
+se_beta_1 <- 0.001260
+alpha <- 0.05
+lower_bound <- beta_1+qt(alpha/2,n-2)*se_beta_1 
+upper_bound <- beta_1-qt(alpha/2,n-2)*se_beta_1
+print(paste0(c("CI lower bound:", lower_bound)))
+print(paste0(c("CI upper bound:", upper_bound)))
+```
+Both approaches produce the same result which gives 95% C.I. of $\beta_1$ is $(-0.0096, -0.0044)$
+
+## part D): Percent of the total variability in $y$ explained by model
+
+The total variability in $y$ that is explained by the model is given by the value of $R^2$. Getting $R^2$ from the summary of the fitted model in R,
+
+``` {r}
+summary(model_p2_1)$r.squared
+```
+
+We can see that 54.5% of the variability in $y$ is explained by the model since $R^2=0.545$.
+
+## part E): Calculate 95% CI on mean response at point $x=2000$
+Using R to compute the confidence interval at $x=2000$,
+``` {r}
+y_mean_ci <- predict(model_p2_1, newdata=data.frame(x8=2000), interval="confidence", level=0.95)
+print(y_mean_ci)
+```
+
+We see from the printed result that the mean response is $\hat{\mu}_{y|x_0}=7.73$ and the 95% CI is given as $(6.77, 8.71)$
+
+# Problem 2.2
+# Find a point estimate prediction at $x=1800$ and a 90% prediction interval for that point.
+Using R to compute the prediction at $x=2000$ and the 90% prediction interval,
+``` {r}
+y_hat_pi <- predict(model_p2_1, newdata=data.frame(x8=1800), interval="prediction", level=0.90)
+print(y_hat_pi)
+```
+We see from the printed result that the predicted response is $\hat{y}=9.14$ and the 90% prediction interval is $(4.94, 13.35)$.
+
+
+# Problem 2.6
+## part A) Fit a simple linear regression model
+
+Our model is
+\[
+Y = \beta_0+\beta_1 X+\epsilon.
+\]
+
+Here, $Y$ is (Sale Price of House)/1000 and $X$ is Taxes/1000. Using R's `lm` function to fit the model:
+``` {r}
+# read in data
+data_p2_6 <- read.csv(file ="./data/linear_regression_5e_data_sets/Appendices/data-table-B4.csv")
+# fit model & print summary
+model_p2_6 = lm(y ~ x1,data = data_p2_6)
+summary(model_p2_6)
+```
+
+From the printed summary we see that the fitted model is $\hat{y} = 13.3202 -3.3244 x$
+
+## part B) Test for significance of regression
+We could use a $F$-test or $t$-test to test the null hypothesis $H_0: \beta_1=0$ vs.
+the alternative hypothesis $H_a: \beta_1 \neq 0$. If we are using the significance level of $\alpha=0.05$, 
+we can see in the summary of the `lm` function that for $\hat{\beta}_1$, the p-value is $p=2.05 * 10^{-8}$. Since $p<\alpha$, we can reject $H_0$ and so it's reasonable to say that $x$ does have value in explaining the variation in $y$. 
+
+## part C): Percent of the total variability in selling price, $y$, explained by model
+
+The total variability in selling price, $y$, that is explained by the model is given by the value of $R^2$. Getting $R^2$ from the summary of the fitted model in R,
+
+``` {r}
+summary(model_p2_6)$r.squared
+```
+
+From the printed value of $R^2=0.77$, we can see that 77% of the variability in the selling price, $y$, is explained by this model 
+
+## part D): Find a 95% CI on $\hat{\beta}_1$
+
+Using R's `confint` function,
+``` {r}
+# calculate confidence interval using R
+confint(model_p2_6, "x1", level=0.95)
+```
+We can see from the result of `confint` that the 95% CI on $\hat{\beta}_1$ is $(2.51, 4.13)$.
+
+## part E): Find a 95% CI on the mean selling price,$y$, when current taxes are $750.
+
+We would like to find the CI mean value of $y$ when $x=750/1000$. From R:
+``` {r}
+y_mean_ci <- predict(model_p2_6, newdata=data.frame(x1=750/1000), interval="confidence", level=0.95)
+print(y_mean_ci)
+```
+We see from the printed result that the mean response is $\hat{\mu}_{y|x_0}=15.8$ and the 95% CI on is given as $(11.1, 20.6)$. Note that the mean value corresponds is \$15,800 and that the given value of $x$ is outside the range of the data used to fit the model.
+
+
+
+# Problem 2.14
+# part A): Make a scatterplot of the data
+
+Using R to read in the data & make a scatter plot. From the plot, the data does not appear to have a strong trend.
+``` {r}
+# read in data
+data_p2_14 <- read.csv(file ="./data/linear_regression_5e_data_sets/Chapter 2/Problems/data-prob-2-14.csv")
+
+# Basic scatter plot
+ggplot(data_p2_14, aes(x=ratio, y=visc)) + geom_point()
+```
+
+# part B): Estimate the prediction equation
+The prediction equation is the fitted linear model which can be written as
+\[
+\hat{y} = \hat{\beta}_0+\hat{\beta}_1 x
+\]
+
+Here, $Y$ is viscosity of the solution and $X$ is molar ratio. Using R's `lm` function to fit the model:
+``` {r}
+# fit model & print summary
+model_p2_14 <- lm(visc ~ ratio,data = data_p2_14)
+summary(model_p2_14)
+```
+From the printed summary we see that the fitted model is $\hat{y} = 0.671-0.296 x$.
+
+# part C): Perform a complete, appropriate analysis.
+The scatterplot in part A did not show a very strong linear trend. The $R^2$ value quantifies the amount of variability in $y$ explained by the model:
+``` {r}
+summary(model_p2_14)$r.squared
+```
+The calculated $R^2=0.21$ indicates only 21% of the variability in $y$ is explained by the linear model which makes sense given the lack of a strong linear trend observed in the plot.
+
+We can perform a $t$-test to test the null hypothesis $H_0: \beta_1=0$ vs.the alternative hypothesis $H_a: \beta_1 \neq 0$ to investigate further on whether the value of $x$ is of value to explaining the variation in $y$. From the printed summary of the `lm` function used to fit the linear model, we see that the $p$-value associated with $\beta_1$ is $p=0.25$. If we use the 95% significance level to perform the hypothesis test, $\alpha=0.05$. Since $p>\alpha$, we do not reject $H_0$ which suggests that $x$ has little value in explaining the variation in $y$. This further supports the initial observation made regarding the scatterplot.
+
+Using R's `confint` function to find the 95% CI on $\hat{\beta}_1$,
+``` {r}
+# calculate confidence interval using R
+confint(model_p2_14, "ratio", level=0.95)
+```
+We find that the 95% CI on $\hat{\beta}_1$ is $(-0.8627412, 0.269884)$. This CI includes 0 which agrees with the results of our hypothesis test on $H_0: \beta_1=0$ vs $H_a: \beta_1 \neq 0$. Furthermore, the CI is wide relative to the magnitude of $\hat{\beta}_1$ which also suggests a fairly large degree of imprecision in our estimate of $\hat{\beta}_1=-0.296$.
+
+# part D): Calculate and plot the 95% confidence and prediction bands.
+
+``` {r}
+
+data_new <- data.frame(ratio = sort(data_p2_14$ratio))
+# compute confidence bands
+band_confidence <- predict(model_p2_14, newdata = data_new, interval = 'confidence')
+band_confidence <- cbind(band_confidence, data_new)
+
+#compute prediction band
+band_prediction <- predict(model_p2_14, newdata = data_new, interval = 'prediction')
+band_prediction <- cbind(band_prediction, data_new)
+
+# plot confidence & prediction bands with original x,y observations
+plot<- ggplot() + geom_line(data=band_confidence, aes(x=ratio, y=lwr), color='black') +
+  geom_line(data=band_confidence, aes(x=ratio, y=upr), color='black') +
+  geom_point(data=data_p2_14, aes(x=ratio, y=visc)) +
+  geom_line(data=band_prediction, aes(x=ratio, y=upr), color='green') +
+  geom_line(data=band_prediction, aes(x=ratio, y=lwr), color='green') 
+plot + xlab("Ratio") + ylab("Viscosity")
+``` 
+
+In the above plot, each of the original observations $(x_i, y_i)$ is shown as a black point while the confidence band is shown as a black pair of lines and the prediction band is shown as a green pair of lines. As expected, the prediction band is wider than the confidence band. 
+
+# Problem 2.18
+# part A): Fit a simple linear regression 
+
+Using R's `lm` function to fit the model:
+``` {r}
+# read in data
+data_p2_18 <- read.csv(file ="./data/linear_regression_5e_data_sets/Chapter 2/Problems/data-prob-2-18.csv")
+# fit model & print summary
+model_p2_18 = lm(returned_impress_week_mil ~ amount_spent_mil,
+                 data = data_p2_18)
+summary(model_p2_18)
+```
+
+From the printed summary we see that the fitted model is $\hat{y} = 22.16 +0.36x$.
+
+# part B): Determine if relationship between response & predictor is significant 
+
+We can perform a $t$-test to test the null hypothesis $H_0: \beta_1=0$ vs.the alternative hypothesis $H_a: \beta_1 \neq 0$ to investigate whether the value of $x$ is of value to explaining the variation in $y$. From the printed summary of the `lm` function used to fit the linear model, we see that the $p$-value associated with $\beta_1$ is $p=0.0014$. If we use the 95% significance level to perform the hypothesis test then $\alpha=0.05$. Since $p<\alpha$, we reject $H_0$ which suggests that $x$ has has value in explaining the variation in $y$ and suggests that the relationship between amount a company spends on advertising and retained impressions is significant. However, since $R^2 = 0.424$ only 42.4% of the variation in $y$ is explained by the model indicating that there is a fair amount of variation in $y$ not explained by the model even though the $t$-test suggests that $x$ has some value in explaining the variation in $y$.
+
+# part C): Construct 95% confidence & prediction bands
+
+Computing in R:
+``` {r}
+data_new <- data.frame(amount_spent_mil = sort(data_p2_18$amount_spent_mil))
+# compute confidence bands
+band_confidence <- predict(model_p2_18, newdata = data_new, interval = 'confidence')
+band_confidence <- cbind(band_confidence, data_new)
+print("confidence band:")
+print(band_confidence)
+
+#compute prediction band
+band_prediction <- predict(model_p2_18, newdata = data_new, interval = 'prediction')
+band_prediction <- cbind(band_prediction, data_new)
+print("prediction band:")
+print(band_prediction)
+```
+
+In the printed tables above, for each value of the predictor, `amount_spent_mil`, the upper and lower limits of the bands are located in columns `lwr` and `upr`, respectively. As expected the prediction pand is wider than the confidence band at each value of $x$. 
+
+# part D): Give 95% confidence & prediction intervals for the MCI firm.
+
+The MCI firm is given by the observation $(26.9, 50.7)$. The 95% CI and prediction interval can be computed at $x=26.9$:
+``` {r}
+y_hat_ci <- predict(model_p2_18, newdata=data.frame(amount_spent_mil=26.9), interval="confidence", level=0.95)
+print(y_hat_ci)
+
+y_hat_pi <- predict(model_p2_18, newdata=data.frame(amount_spent_mil=26.9), interval="prediction", level=0.95)
+print(y_hat_pi)
+```
+
+The 95% CI for MCI, $x=26.9$, is $(20.18, 43.68)$ while the corresponding 95% prediction interval is $(-18.64, 82.50)$
+
+# Additional proof-based problems
+# a) Prove $\sum_{i=1}^n e_i = 0$ or equivalent $\sum_{i=1}^n y_i = \sum_{i=1}^n \hat{y}_i$
+
+From the least squares criterion, we have:
+\[
+\begin{aligned}
+S(\beta_0, \beta_1) = \sum_{i=1}^n[y_i - (\beta_0 + \beta_1 x_i)]^2\\
+
+\frac{\partial S}{\partial \beta_0} = -2\sum_{i=1}^n [y_i - (\beta_0 + \beta_1 x_i)] =0 \\
+
+\sum_{i=1}^n [y_i - (\beta_0 + \beta_1 x_i)] =0\\
+
+\sum_{i=1}^n [y_i - \hat{y}_i] =0\\
+
+\sum_{i=1}^n e_i =0 
+\end{aligned}
+\]
+
+# b) Prove $\sum_{i=1}^n x_i e_i = 0$ or equivalent  $\sum_{i=1}^n \hat{y}_i e_i = 0$
+
+From the least squares criterion, we have:
+\[
+\begin{aligned}
+S(\beta_0, \beta_1) = \sum_{i=1}^n[y_i - (\beta_0 + \beta_1 x_i)]^2\\
+
+\frac{\partial S}{\partial \beta_1} = -2\sum_{i=1}^n x_i [y_i - (\beta_0 + \beta_1 x_i)]  =0 \\
+
+\sum_{i=1}^n x_i[y_i - (\beta_0 + \beta_1 x_i)]  =0 \\
+
+\sum_{i=1}^n x_i[y_i - \hat{y}_i] =0 \\
+
+\sum_{i=1}^n  x_i e_i =0 \\
+\end{aligned}
+\]

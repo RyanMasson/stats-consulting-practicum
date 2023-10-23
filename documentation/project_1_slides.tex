@@ -1,0 +1,223 @@
+\documentclass[
+    %aspectratio=169,
+]{beamer}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+\usepackage{expl3,biblatex}
+
+\addbibresource{bibliography.bib}
+
+\usepackage{booktabs}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\usepackage{svg}
+\usepackage{graphicx,caption}
+\usepackage{floatrow}
+
+% set font
+\usefonttheme{serif}
+
+% to prevent the boxes from overlapping the logo at the lower right corner
+\addtobeamertemplate{block begin}{%
+  \setlength{\textwidth}{0.9\textwidth}%
+}{}
+
+\addtobeamertemplate{block alerted begin}{%
+  \setlength{\textwidth}{0.9\textwidth}%
+}{}
+
+\addtobeamertemplate{block example begin}{%
+  \setlength{\textwidth}{0.9\textwidth}%
+}{}
+
+
+% usage: \hl{text to emphasis as yellow background}
+\usepackage{soul}
+\makeatletter
+\let\HL\hl
+\renewcommand\hl{%
+  \let\set@color\beamerorig@set@color
+  \let\reset@color\beamerorig@reset@color
+  \HL}
+\makeatother
+
+
+% usage: create outline pages before each section
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% ---------------------------------------------------
+
+% Title page information
+\title[Mock Presentation]{Separating intended and unintended implicit learning effect in preschooler language development study}
+\subtitle[Short Subtitle]{STATS 570/409 \\ Client: Prof. Carolyn Quam, Speech \& Hearing Sciences}
+\author[Data Whisperers]{Lauren, Will, Betsy, and Ryan \texorpdfstring{\\}{, }}
+\institute[PSU]{Portland State University}
+\date{May 11, 2023}
+\logo{\includesvg[height=1cm]{./uibeamer/logo/ui-stacked-gold-black.svg}}
+\subject{Presentation Subject}
+\keywords{the, presentation, keywords}
+
+% --------------------------------------------------
+
+\begin{document}
+
+% make the title page
+\begin{frame}%[plain]
+\maketitle
+\end{frame}
+
+% make the outline page/table of contents
+%\begin{frame}
+%\frametitle{Table of Contents}
+%\tableofcontents
+%\end{frame}
+
+% ----------------------------------------------------
+
+\begin{frame}{Background}
+\begin{itemize}
+    \item Experimental study comparing implicit learning in preschoolers with DLD and TLD.
+    \item Participants seemed to learn an alternation heuristic in addition to associating sound with food or drink.
+\end{itemize}
+\centering
+\includegraphics[scale=0.245]{project 1 Final slides/images/experiment.png}
+    %% #TODO add image of experimental scheme from conference poster
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Goals}
+\begin{itemize}
+    \item Determine how to separate effect of alternation heuristic from learning of auditory cue corresponding to food or drink.
+    \item If effects could not be separated, document difficulty in separating effects and impact of confounding.
+\end{itemize}
+
+\end{frame}
+
+% ----------------------------------------------------
+
+\begin{frame}{Basic Data Description}
+\begin{itemize}
+    \item Experimental data in tabular form.
+    \item Response variable is binary indicating correctness of participant's indication of monster's request for food or drink.
+    \item Additional variables explored: response time,  trial number,  trial order,  sound type,  experimental phase,  alternation from previous trial,  and participant type (TLD and DLD).
+    \item 26 participants of each type (TLD and DLD).
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Exploratory Data Analysis}
+\begin{itemize}
+  \item No obvious outliers were observed in response times, correctness percentage, or side-switching counts for either DLD or TLD participants.
+  \item The number of participants in each type, trial order group combination was examined.
+  \item The trial order group specifies the sequence of alternation of the stimuli in the training and tests.
+\end{itemize}
+%% #TODO: insert figure showing count
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Trial Order Count Plot}
+\centering
+\includegraphics[scale=0.265]{project 1 Final slides/images/trial_order_bar_plot.png}
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Response Time Plot: EDA}
+\centering
+\includegraphics[scale=0.245]{project 1 Final slides/images/Train_vs_Test_ResponseTime.png}
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Correctness Plot: EDA}
+\centering
+\includegraphics[scale=0.245]{project 1 Final slides/images/Train_vs_Test_CorrectnessPerc.png}
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Methods explored but determined unsuitable}
+\begin{itemize}
+    \item Treating individual trials as treatment periods in a crossover experimental design
+	\begin{itemize}
+		\item Would have involved employing a mixed effects model
+		\item Determined unsuitable since carryover effects appear to be present between trials in testing phase of experiment
+	\end{itemize}
+    \item Generalized additive mixed models using the `mcgv` library
+	\begin{itemize}
+		\item Considered adding autoregressive terms to capture time varying treatment effect
+		\item Determined time varying confounding effects (alternation sequence) biases time varying treatment effect estimates
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Methods explored that can handle time varying confounding}
+\begin{itemize}
+    \item Causal inference methods (used in longitudinal studies)
+	\begin{itemize}
+		\item G-computation formula
+		\item Inverse probability weighting estimation of marginal structural models
+	 	\item G-estimation of structural nested models
+	\end{itemize}
+    \item Sequential conditional mean models with propensity scores
+\end{itemize}
+\end{frame}
+
+
+% ------------------------------------------------------
+
+\begin{frame}{Adapting Study Data to gfoRmula Package}
+\begin{itemize}
+    \item Specify the outcome type 
+    \item Structure an input dataset to the main function gformula()
+    \item Interpret output (gformula class object)
+\end{itemize}
+\centering
+\includegraphics[scale=0.55]{project 1 Final slides/images/table.png}
+\end{frame}
+
+% ------------------------------------------------------
+
+
+\begin{frame}{Conclusions}
+Recommend experimenting with implementing:
+\begin{itemize}
+    \item G-computation formula via R package `gfoRmula`
+    \item Sequential conditional mean models with propensity scores via R package `geepack`
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Appendix}
+\end{frame}
+
+% ------------------------------------------------------
+
+\begin{frame}{Causal Inference}
+\begin{itemize}
+    \item James Robins' generalized methods 
+    \item Originally developed for addressing problems with longitudinal studies in medicine and epidemiology 
+    \item This project could extend these methods to a novel context 
+\end{itemize}
+\centering
+\includegraphics[scale=0.55]{project 1 Final slides/images/logo.png}
+\end{frame}
+
+% ------------------------------------------------------
+
+\end{document}

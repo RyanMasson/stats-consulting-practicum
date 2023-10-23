@@ -1,0 +1,32 @@
+---
+title: "Implementing the gfoRmula package for preschooler implicit learning study"
+output: html_document
+---
+
+### PSU CADES Consulting Lab, Spring 2023
+### Elizabeth “Betsy” Camp, Ryan Masson, Will McIntosh, Lauren Montefalcon
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Data preparation
+```{r cars}
+library(gfoRmula)
+library(data.table)
+setwd("~/Documents/psu/STAT 570/stat_consulting_preschoolers/modeling/")
+
+
+```
+
+# Defining covariate distributions, outcome model, and interventions
+
+
+$= E(Y^{x_0=1,x_1=1}) - E(Y^{x_0=0,x_1=0})$
+
+$\psi = E(Y^{x_0=1,x_1=1} - Y^{x_0=0,x_1=0})$
+
+
+
+$E(Y^{x_0,x_1}) = \displaystyle\sum_{l_1}E(Y|X_1 = x_1, L_1 = l_1, X_0 = x_0) P(L_1 = l_1|X_0 = x_0)$
